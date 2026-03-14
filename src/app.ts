@@ -23,7 +23,7 @@ export function createApp() {
     cors({
       origin: [
       "http://localhost:3000",
-      "https://digitalpylot-frontend.vercel.app/"
+      "https://digitalpylot-frontend.vercel.app"
       
     ],
       credentials: true,

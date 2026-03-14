@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { SignOptions } from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import { env } from "../config/env.js";
 
@@ -11,14 +11,14 @@ export type TokenPayload = {
 };
 
 export function signAccessToken(payload: TokenPayload) {
-  return jwt.sign(payload, env.jwtSecret, { expiresIn: env.jwtAccessExpires });
+  const options: SignOptions = { expiresIn: env.jwtAccessExpires as SignOptions["expiresIn"] };
+  return jwt.sign(payload, env.jwtSecret, options);
 }
 
 export function signRefreshToken(payload: TokenPayload) {
   const tokenId = uuidv4();
-  const token = jwt.sign({ ...payload, jti: tokenId }, env.jwtSecret, {
-    expiresIn: env.jwtRefreshExpires,
-  });
+  const options: SignOptions = { expiresIn: env.jwtRefreshExpires as SignOptions["expiresIn"] };
+  const token = jwt.sign({ ...payload, jti: tokenId }, env.jwtSecret, options);
   return { token, tokenId };
 }
 

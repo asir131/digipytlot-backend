@@ -8,15 +8,15 @@ import { incrementTokenVersion } from "../services/userService.js";
 
 const refreshCookieOptions = {
   httpOnly: true,
-  sameSite: "lax" as const,
-  secure: env.nodeEnv === "production",
+  sameSite: "none" as const,
+  secure: true,
   path: "/",
 };
 
 const accessCookieOptions = {
   httpOnly: false,
-  sameSite: "lax" as const,
-  secure: env.nodeEnv === "production",
+  sameSite: "none" as const,
+  secure: true,
   path: "/",
 };
 
